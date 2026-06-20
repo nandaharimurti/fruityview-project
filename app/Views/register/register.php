@@ -8,7 +8,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@100..900&amp;family=Work+Sans:wght@100..900&amp;display=swap" rel="stylesheet">
 <script id="tailwind-config">
       tailwind.config = {
-        darkMode: "class",
+        darkMode: "class"
         theme: {
           extend: {
             "colors": {
@@ -280,3 +280,4 @@
 
 
 </body></html>
+
