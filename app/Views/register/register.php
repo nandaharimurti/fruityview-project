@@ -52,7 +52,11 @@
 <h3 class="font-display-lg-mobile text-display-lg-mobile text-on-surface mb-2">Pendaftaran Akun FruityView</h3>
 <p class="text-on-surface-variant font-body-md">Bergabunglah dengan platform distribusi buah segar terbaik untuk kemudahan akses nutrisi harian Anda.</p>
 </div>
+ feature/FV-52-register
 <form class="space-y-6" action="/app/Controllers/AuthController.php" method="POST">
+
+<form class="space-y-6" action="../../Controllers/AuthController.php" method="POST">
+ main
 <input type="hidden" name="action" value="register">
 <!-- Full Name -->
 <div>
