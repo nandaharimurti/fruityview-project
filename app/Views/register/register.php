@@ -6,110 +6,8 @@
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;700;800&amp;family=Work+Sans:wght@400;500&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@100..900&amp;family=Work+Sans:wght@100..900&amp;display=swap" rel="stylesheet">
-<script id="tailwind-config">
-      tailwind.config = {
-        darkMode: "class"
-        theme: {
-          extend: {
-            "colors": {
-                    "tertiary-container": "#c7a600",
-                    "secondary": "#006e1c",
-                    "tertiary-fixed": "#ffe170",
-                    "outline-variant": "#ddc1ae",
-                    "on-surface": "#1a1c19",
-                    "on-primary-fixed": "#2f1500",
-                    "on-background": "#1a1c19",
-                    "tertiary-fixed-dim": "#e9c400",
-                    "on-tertiary-fixed": "#221b00",
-                    "error-container": "#ffdad6",
-                    "on-secondary-fixed": "#002204",
-                    "surface-container-highest": "#e3e3de",
-                    "surface-container-low": "#f4f4ee",
-                    "primary-fixed-dim": "#ffb77f",
-                    "primary-container": "#ff8a00",
-                    "surface-dim": "#dadad5",
-                    "on-secondary": "#ffffff",
-                    "secondary-container": "#91f78e",
-                    "on-tertiary-container": "#4a3d00",
-                    "on-error-container": "#93000a",
-                    "on-primary-container": "#613100",
-                    "inverse-on-surface": "#f1f1ec",
-                    "surface-container-lowest": "#ffffff",
-                    "surface-container-high": "#e8e8e3",
-                    "error": "#ba1a1a",
-                    "on-secondary-fixed-variant": "#005313",
-                    "primary": "#914c00",
-                    "on-primary": "#ffffff",
-                    "on-tertiary-fixed-variant": "#544600",
-                    "on-tertiary": "#ffffff",
-                    "surface-variant": "#e3e3de",
-                    "secondary-fixed-dim": "#78dc77",
-                    "tertiary": "#705d00",
-                    "surface-tint": "#914c00",
-                    "surface-container": "#eeeee9",
-                    "outline": "#8a7362",
-                    "surface": "#fafaf4",
-                    "secondary-fixed": "#94f990",
-                    "on-surface-variant": "#564334",
-                    "on-primary-fixed-variant": "#6f3900",
-                    "on-secondary-container": "#00731e",
-                    "on-error": "#ffffff",
-                    "background": "#fafaf4",
-                    "surface-bright": "#fafaf4",
-                    "inverse-surface": "#2f312e",
-                    "inverse-primary": "#ffb77f",
-                    "primary-fixed": "#ffdcc4"
-            },
-            "borderRadius": {
-                    "DEFAULT": "0.25rem",
-                    "lg": "0.5rem",
-                    "xl": "0.75rem",
-                    "full": "9999px"
-            },
-            "spacing": {
-                    "gutter": "24px",
-                    "unit": "8px",
-                    "margin-desktop": "64px",
-                    "container-max": "1280px",
-                    "margin-mobile": "20px"
-            },
-            "fontFamily": {
-                    "headline-md": ["Plus Jakarta Sans"],
-                    "display-lg-mobile": ["Plus Jakarta Sans"],
-                    "body-md": ["Work Sans"],
-                    "label-bold": ["Plus Jakarta Sans"],
-                    "headline-sm": ["Plus Jakarta Sans"],
-                    "display-lg": ["Plus Jakarta Sans"],
-                    "body-lg": ["Work Sans"]
-            },
-            "fontSize": {
-                    "headline-md": ["32px", {"lineHeight": "40px", "fontWeight": "700"}],
-                    "display-lg-mobile": ["40px", {"lineHeight": "48px", "letterSpacing": "-0.01em", "fontWeight": "800"}],
-                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
-                    "label-bold": ["14px", {"lineHeight": "20px", "fontWeight": "700"}],
-                    "headline-sm": ["24px", {"lineHeight": "32px", "fontWeight": "700"}],
-                    "display-lg": ["56px", {"lineHeight": "64px", "letterSpacing": "-0.02em", "fontWeight": "800"}],
-                    "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}]
-            }
-          },
-        },
-      }
-    </script>
-<style>
-        .material-symbols-outlined {
-            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
-            display: inline-block;
-            vertical-align: middle;
-        }
-        .organic-shape {
-            clip-path: polygon(10% 0, 100% 0, 100% 100%, 0 100%);
-        }
-        .glass-card {
-            background: rgba(255, 255, 255, 0.7);
-            backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 0.3);
-        }
-    </style>
+<script src="/app/Views/assets/js/tailwind-config.js"></script>
+<link rel="stylesheet" href="/app/Views/assets/css/register.css">
 </head>
 <body class="bg-background text-on-background font-body-md min-h-screen flex flex-col">
 <!-- TopNavBar (Suppressed for focused Transactional Page per UX mandate, but user asked for it specifically) -->
@@ -154,7 +52,11 @@
 <h3 class="font-display-lg-mobile text-display-lg-mobile text-on-surface mb-2">Pendaftaran Akun FruityView</h3>
 <p class="text-on-surface-variant font-body-md">Bergabunglah dengan platform distribusi buah segar terbaik untuk kemudahan akses nutrisi harian Anda.</p>
 </div>
+ feature/FV-52-register
+<form class="space-y-6" action="/app/Controllers/AuthController.php" method="POST">
+
 <form class="space-y-6" action="../../Controllers/AuthController.php" method="POST">
+ main
 <input type="hidden" name="action" value="register">
 <!-- Full Name -->
 <div>
@@ -238,46 +140,7 @@
 </main>
 <!-- Footer -->
 
-<script>
-        // Micro-interactions for form inputs
-        const inputs = document.querySelectorAll('input');
-        inputs.forEach(input => {
-            input.addEventListener('focus', () => {
-                input.parentElement.classList.add('ring-2', 'ring-primary/20');
-            });
-            input.addEventListener('blur', () => {
-                input.parentElement.classList.remove('ring-2', 'ring-primary/20');
-            });
-        });
-
-        // Floating fruit effect on the left side (Visual flair)
-        const leftSide = document.querySelector('.lg\\:flex');
-        if(leftSide) {
-            for(let i=0; i<5; i++) {
-                const bubble = document.createElement('div');
-                bubble.className = 'absolute bg-white/10 rounded-full blur-xl';
-                const size = Math.random() * 100 + 50;
-                bubble.style.width = size + 'px';
-                bubble.style.height = size + 'px';
-                bubble.style.left = Math.random() * 100 + '%';
-                bubble.style.top = Math.random() * 100 + '%';
-                bubble.style.animation = `pulse ${Math.random() * 4 + 3}s infinite ease-in-out`;
-                leftSide.appendChild(bubble);
-            }
-        }
-
-        const togglePassword = document.getElementById('togglePassword');
-        const passwordInput = document.getElementById('password');
-
-        if (togglePassword && passwordInput) {
-            togglePassword.addEventListener('click', () => {
-                const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
-                passwordInput.setAttribute('type', type);
-                togglePassword.querySelector('span').textContent = type === 'password' ? 'visibility' : 'visibility_off';
-            });
-        }
-    </script>
-
+<script src="/app/Views/assets/js/register.js"></script>
 
 </body></html>
 
