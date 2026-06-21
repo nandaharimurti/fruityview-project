@@ -1,13 +1,8 @@
 <?php
-
-require 'firebase/firebase.php';
-
-$products = $database->getReference('products')->getValue();
-
-echo "<h1>Daftar Produk</h1>";
-
-foreach ($products as $product) {
-    echo "<p>";
-    echo $product['nama']." - Rp".$product['harga']." - Stok: ".$product['stok'];
-    echo "</p>";
+// Load bootstrap resources if present (keeps firebase available)
+if (file_exists(__DIR__ . '/firebase/firebase.php')) {
+    require __DIR__ . '/firebase/firebase.php';
 }
+
+// Serve the home view as the site root
+require __DIR__ . '/app/Views/home/index.php';
