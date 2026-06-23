@@ -99,7 +99,7 @@
         },
       }
     </script>
-<link rel="stylesheet" href="../../public/assets/css/catalog.css">
+<link rel="stylesheet" href="/public/assets/css/catalog.css">
 </head>
 <body class="bg-background text-on-background font-body-md selection:bg-primary-fixed selection:text-on-primary-fixed overflow-x-hidden">
 <!-- TopNavBar -->
@@ -331,5 +331,5 @@
 </div>
 </div>
 </footer>
-<script src="../../public/assets/js/catalog.js"></script>
+<script src="/public/assets/js/catalog.js"></script>
 </body></html>
