@@ -102,7 +102,7 @@
         },
       }
     </script>
-<link href="../../public/assets/css/logout.css" rel="stylesheet"/>
+<link href="/public/assets/css/logout.css" rel="stylesheet"/>
 </head>
 <body class="bg-background text-on-background font-body-md min-h-screen flex flex-col">
 <!-- TopNavBar (Simplified for Logout) -->
@@ -204,5 +204,5 @@
 </div>
 </div>
 </footer>
-<script src="../../public/assets/js/logout.js"></script>
+<script src="/public/assets/js/logout.js"></script>
 </body></html>
