@@ -4,14 +4,11 @@
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <title>Keluar - FruityView</title>
-<!-- Google Fonts -->
 <link href="https://fonts.googleapis.com" rel="preconnect"/>
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;700;800&amp;family=Work+Sans:wght@400;500&amp;display=swap" rel="stylesheet"/>
-<!-- Material Symbols -->
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
-<!-- Tailwind CSS -->
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
 <script id="tailwind-config">
       tailwind.config = {
@@ -105,7 +102,6 @@
 <link href="/public/assets/css/logout.css" rel="stylesheet"/>
 </head>
 <body class="bg-background text-on-background font-body-md min-h-screen flex flex-col">
-<!-- TopNavBar (Simplified for Logout) -->
 <header class="fixed top-0 w-full z-50 bg-surface/80 backdrop-blur-md shadow-sm">
 <div class="flex justify-between items-center px-margin-desktop py-4 max-w-container-max mx-auto">
 <div class="flex items-center gap-2">
@@ -118,20 +114,15 @@
 </nav>
 </div>
 </header>
-<!-- Main Content Canvas -->
 <main class="flex-grow flex items-center justify-center pt-32 pb-20 px-margin-mobile md:px-margin-desktop relative overflow-hidden">
-<!-- Animated Background Elements -->
 <div class="absolute top-1/4 -left-20 w-64 h-64 bg-secondary-container/20 rounded-full blur-3xl -z-10 float-animation"></div>
 <div class="absolute bottom-1/4 -right-20 w-80 h-80 bg-primary-container/10 rounded-full blur-3xl -z-10 float-animation" style="animation-delay: -3s;"></div>
-<!-- Logout Success Card -->
 <div class="max-w-xl w-full">
 <div class="bg-surface-container-lowest rounded-[2.5rem] p-8 md:p-16 shadow-[0_20px_50px_rgba(145,76,0,0.1)] border border-surface-container-high text-center relative overflow-hidden">
-<!-- Success Illustration Area -->
 <div class="mb-10 relative inline-block">
 <div class="w-32 h-32 bg-secondary-container rounded-full flex items-center justify-center mx-auto mb-6 relative z-10 scale-110">
 <span class="material-symbols-outlined text-secondary text-6xl" style="font-variation-settings: 'wght' 700;">check_circle</span>
 </div>
-<!-- Decorative fruit splash -->
 <div class="absolute -top-4 -right-4 w-12 h-12 bg-tertiary-fixed rounded-full blur-sm opacity-60"></div>
 <div class="absolute -bottom-2 -left-6 w-16 h-16 bg-primary-fixed rounded-full blur-md opacity-40"></div>
 </div>
@@ -143,20 +134,17 @@
                         Terima kasih telah mengunjungi FruityView. Sampai jumpa kembali!
                     </p>
 </div>
-<!-- Action Buttons -->
 <div class="mt-12 flex flex-col gap-4">
-<button class="bg-primary-container text-white font-label-bold text-lg py-4 px-10 rounded-full shadow-lg hover:shadow-xl hover:-translate-y-1 active:scale-95 transition-all duration-300">
+<a class="inline-flex items-center justify-center bg-primary-container text-white font-label-bold text-lg py-4 px-10 rounded-full shadow-lg hover:shadow-xl hover:-translate-y-1 active:scale-95 transition-all duration-300" href="../login/login.php">
                         Masuk Kembali
-                    </button>
-<a class="text-primary font-label-bold hover:text-primary-container transition-colors py-2" href="#">
+                    </a>
+<a class="text-primary font-label-bold hover:text-primary-container transition-colors py-2" href="../home/index.php">
                         Kembali ke Beranda
                     </a>
 </div>
-<!-- Floating Fruit Elements (Purely Decorative) -->
 <img class="absolute -bottom-10 -right-10 w-32 h-32 opacity-20 rotate-12 pointer-events-none" data-alt="A hyper-realistic, studio-lit photo of a fresh organic orange with green leaves, positioned as a decorative element with soft depth of field, set against a clean light background to maintain the Orchard Fresh brand aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCMtdU3LeelNUNKn4tySrcPQ4TqkxB40vc3OxlnjahUF-PFZqqLf08A4WR78v_PWu6_qimj15_aj7XuIbsiKpQs_GTxudbGl2txKMLcp6gbNB0FcA2F4X15x31X4BuL0Sq8pV1MnuOJ7-qspcmnA-cYQxHQ82Q22N-xKZEEnJU08XcdquH48EO_t78bE1DE1V9DvXW3Sg4GON08NPuFUIhJgZoYIVvOa0GhpDC4Nysr6hebyJVo2MjyjM4YdD2-YFGVyYMxbfZE_g"/>
 <img class="absolute -top-6 -left-6 w-24 h-24 opacity-20 -rotate-12 pointer-events-none" data-alt="A vibrant and crisp studio shot of a fresh green lime, captured in high resolution with natural lighting and soft shadows, appearing to float gracefully to complement a modern UI layout." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBdp-7KJaG_3o6laV37Z-4XecXHJRqlWYb1zJZMP85YSOBQcfn9IC4IBiFA3CM3-ufcRLlt_tT4n4ytcgDtOeOAVHX-V0ZzZEyrSln-JBEMHT6UtbVAMUS0X7KPprJNPwt5-TT0aEzW8V6OYyr9LScJMLA5p4AJYfoG41yGfZ5gkLvLdpQ-dzQ0HNWY5OQ-gN1-n749UXiINwp4ClF1Fyn7GaFIAtq2zuzQ3IUYNISHy6Dug5rmrddGP7QgBsF8ItG863yleRFD4A"/>
 </div>
-<!-- Quick Summary / Promotional Bento (Optional high-end touch) -->
 <div class="mt-8 grid grid-cols-2 gap-4">
 <div class="bg-secondary-container/30 p-6 rounded-[2rem] border border-secondary-container/50">
 <span class="material-symbols-outlined text-secondary mb-2">shopping_basket</span>
@@ -171,7 +159,6 @@
 </div>
 </div>
 </main>
-<!-- Footer -->
 <footer class="w-full mt-auto bg-surface-container-low">
 <div class="flex flex-col md:flex-row justify-between items-start md:items-center px-margin-desktop py-12 gap-gutter max-w-container-max mx-auto">
 <div class="space-y-4">
