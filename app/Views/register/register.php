@@ -139,13 +139,14 @@
 <h3 class="font-display-lg-mobile text-display-lg-mobile text-on-surface mb-2">Pendaftaran Akun FruityView</h3>
 <p class="text-on-surface-variant font-body-md">Bergabunglah dengan platform distribusi buah segar terbaik untuk kemudahan akses nutrisi harian Anda.</p>
 </div>
-<form class="space-y-6" onsubmit="event.preventDefault();">
+<form id="register-form" class="space-y-6" action="/app/Controllers/AuthController.php" method="POST" onsubmit="event.preventDefault();">
+<input type="hidden" name="action" value="register">
 <!-- Full Name -->
 <div>
 <label class="block font-label-bold text-label-bold text-on-surface mb-2" for="name">Nama Lengkap</label>
 <div class="relative group">
 <span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-outline group-focus-within:text-primary transition-colors">person</span>
-<input class="w-full pl-12 pr-4 py-4 bg-surface-container-low border-2 border-transparent rounded-xl font-body-md focus:border-primary focus:ring-0 focus:bg-white transition-all duration-200 outline-none" id="name" placeholder="Masukkan nama anda" type="text">
+<input name="name" class="w-full pl-12 pr-4 py-4 bg-surface-container-low border-2 border-transparent rounded-xl font-body-md focus:border-primary focus:ring-0 focus:bg-white transition-all duration-200 outline-none" id="name" placeholder="Masukkan nama anda" type="text">
 </div>
 </div>
 <!-- Email Address -->
@@ -153,13 +154,13 @@
 <label class="block font-label-bold text-label-bold text-on-surface mb-2" for="email">Email Address</label>
 <div class="relative group">
 <span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-outline group-focus-within:text-primary transition-colors">mail</span>
-<input class="w-full pl-12 pr-4 py-4 bg-surface-container-low border-2 border-transparent rounded-xl font-body-md focus:border-primary focus:ring-0 focus:bg-white transition-all duration-200 outline-none" id="email" placeholder="john@example.com" type="email">
+<input name="email" class="w-full pl-12 pr-4 py-4 bg-surface-container-low border-2 border-transparent rounded-xl font-body-md focus:border-primary focus:ring-0 focus:bg-white transition-all duration-200 outline-none" id="email" placeholder="john@example.com" type="email">
 </div>
 </div><div class="">
 <label class="block font-label-bold text-label-bold text-on-surface mb-2" for="password">Password</label>
 <div class="relative group">
 <span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-outline group-focus-within:text-primary transition-colors">lock</span>
-<input class="w-full pl-12 pr-12 py-4 bg-surface-container-low border-2 border-transparent rounded-xl font-body-md focus:border-primary focus:ring-0 focus:bg-white transition-all duration-200 outline-none" id="password" placeholder="••••••••" type="password">
+<input name="password" class="w-full pl-12 pr-12 py-4 bg-surface-container-low border-2 border-transparent rounded-xl font-body-md focus:border-primary focus:ring-0 focus:bg-white transition-all duration-200 outline-none" id="password" placeholder="••••••••" type="password">
 <button class="absolute right-4 top-1/2 -translate-y-1/2 text-outline hover:text-on-surface-variant" type="button">
 <span class="material-symbols-outlined">visibility</span>
 </button>
@@ -171,13 +172,13 @@
 <label class="block font-label-bold text-label-bold text-on-surface mb-2" for="phone">Phone Number</label>
 <div class="relative group">
 <span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-outline group-focus-within:text-primary transition-colors">call</span>
-<input class="w-full pl-12 pr-4 py-4 bg-surface-container-low border-2 border-transparent rounded-xl font-body-md focus:border-primary focus:ring-0 focus:bg-white transition-all duration-200 outline-none" id="phone" placeholder="+1 (555) 000-0000" type="tel">
+<input name="phone" class="w-full pl-12 pr-4 py-4 bg-surface-container-low border-2 border-transparent rounded-xl font-body-md focus:border-primary focus:ring-0 focus:bg-white transition-all duration-200 outline-none" id="phone" placeholder="+1 (555) 000-0000" type="tel">
 </div>
 </div><div class="">
 <label class="block font-label-bold text-label-bold text-on-surface mb-2" for="dob">Tanggal Lahir</label>
 <div class="relative group">
 <span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-outline group-focus-within:text-primary transition-colors">calendar_today</span>
-<input class="w-full pl-12 pr-4 py-4 bg-surface-container-low border-2 border-transparent rounded-xl font-body-md focus:border-primary focus:ring-0 focus:bg-white transition-all duration-200 outline-none" id="dob" type="date">
+<input name="dob" class="w-full pl-12 pr-4 py-4 bg-surface-container-low border-2 border-transparent rounded-xl font-body-md focus:border-primary focus:ring-0 focus:bg-white transition-all duration-200 outline-none" id="dob" type="date">
 </div>
 </div>
 <!-- Password -->
@@ -185,13 +186,13 @@
 <label class="block font-label-bold text-label-bold text-on-surface mb-2" for="address">Alamat</label>
 <div class="relative group">
 <span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-outline group-focus-within:text-primary transition-colors">home</span>
-<input class="w-full pl-12 pr-4 py-4 bg-surface-container-low border-2 border-transparent rounded-xl font-body-md focus:border-primary focus:ring-0 focus:bg-white transition-all duration-200 outline-none" id="address" placeholder="Masukkan alamat" type="text">
+<input name="address" class="w-full pl-12 pr-4 py-4 bg-surface-container-low border-2 border-transparent rounded-xl font-body-md focus:border-primary focus:ring-0 focus:bg-white transition-all duration-200 outline-none" id="address" placeholder="Masukkan alamat" type="text">
 </div>
 </div><div class="">
 <label class="block font-label-bold text-label-bold text-on-surface mb-2" for="zip">Kode Pos</label>
 <div class="relative group">
 <span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-outline group-focus-within:text-primary transition-colors">pin_drop</span>
-<input class="w-full pl-12 pr-4 py-4 bg-surface-container-low border-2 border-transparent rounded-xl font-body-md focus:border-primary focus:ring-0 focus:bg-white transition-all duration-200 outline-none" id="zip" placeholder="12345" type="text">
+<input name="zip" class="w-full pl-12 pr-4 py-4 bg-surface-container-low border-2 border-transparent rounded-xl font-body-md focus:border-primary focus:ring-0 focus:bg-white transition-all duration-200 outline-none" id="zip" placeholder="12345" type="text">
 </div>
 </div>
 <!-- Terms -->
@@ -202,7 +203,7 @@
                             </label>
 </div>
 <!-- Sign Up Button -->
-<button class="w-full bg-primary-container text-on-primary-fixed font-headline-sm text-headline-sm py-4 rounded-full shadow-lg hover:shadow-xl hover:-translate-y-1 active:scale-95 transition-all duration-200" type="submit">
+<button id="signup-btn" class="w-full bg-primary-container text-on-primary-fixed font-headline-sm text-headline-sm py-4 rounded-full shadow-lg hover:shadow-xl hover:-translate-y-1 active:scale-95 transition-all duration-200" type="submit">
                             Sign Up
                         </button>
 <!-- Social Registration -->
@@ -211,7 +212,7 @@
 <div class="relative flex justify-center text-xs uppercase"><span class="bg-surface px-2 text-on-surface-variant font-label-bold">Or continue with</span></div>
 </div>
 <div class="grid gap-4 grid-cols-1">
-<button class="flex items-center justify-center gap-2 py-3 px-4 rounded-xl border-2 border-outline-variant hover:bg-surface-container-low transition-colors duration-200 font-label-bold text-on-surface bg-surface-container-low"><img alt="Google" class="w-5 h-5" src="https://www.gstatic.com/images/branding/product/1x/gsa_512dp.png"> Continue with Google</button>
+<button id="google-register-btn" type="button" class="flex items-center justify-center gap-2 py-3 px-4 rounded-xl border-2 border-outline-variant hover:bg-surface-container-low transition-colors duration-200 font-label-bold text-on-surface bg-surface-container-low"><img alt="Google" class="w-5 h-5" src="https://www.gstatic.com/images/branding/product/1x/gsa_512dp.png"> Continue with Google</button>
 
 </div>
 
@@ -221,34 +222,5 @@
 </div>
 </main>
 <!-- Footer -->
-
-<script>
-        // Micro-interactions for form inputs
-        const inputs = document.querySelectorAll('input');
-        inputs.forEach(input => {
-            input.addEventListener('focus', () => {
-                input.parentElement.classList.add('ring-2', 'ring-primary/20');
-            });
-            input.addEventListener('blur', () => {
-                input.parentElement.classList.remove('ring-2', 'ring-primary/20');
-            });
-        });
-
-        // Floating fruit effect on the left side (Visual flair)
-        const leftSide = document.querySelector('.lg\\:flex');
-        if(leftSide) {
-            for(let i=0; i<5; i++) {
-                const bubble = document.createElement('div');
-                bubble.className = 'absolute bg-white/10 rounded-full blur-xl';
-                const size = Math.random() * 100 + 50;
-                bubble.style.width = size + 'px';
-                bubble.style.height = size + 'px';
-                bubble.style.left = Math.random() * 100 + '%';
-                bubble.style.top = Math.random() * 100 + '%';
-                bubble.style.animation = `pulse ${Math.random() * 4 + 3}s infinite ease-in-out`;
-                leftSide.appendChild(bubble);
-            }
-        }
-    </script>
 <script src="/public/assets/js/register.js"></script>
 </body></html>
