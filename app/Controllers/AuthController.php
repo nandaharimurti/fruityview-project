@@ -33,10 +33,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     echo json_encode([
                         'success' => true,
                         'message' => 'Login berhasil',
-                        'redirect' => '../Views/home/index.php'
+                        'redirect' => '../home/index.php'
                     ]);
                 } else {
-                    header('Location: ../Views/home/index.php');
+                    header('Location: ../home/index.php');
                 }
                 exit;
             }
