@@ -142,7 +142,7 @@
                         Kami menghubungkan Anda langsung dengan petani lokal untuk memberikan kualitas buah terbaik yang dipetik hari ini.
                     </p>
 <div class="flex flex-wrap gap-4 pt-4">
-<button class="bg-primary-container text-on-primary-container px-8 py-4 rounded-full font-label-bold text-lg shadow-lg hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
+<button class="bg-primary-container text-on-primary-container px-8 py-4 rounded-full font-label-bold text-lg shadow-lg hover:shadow-xl hover:-translate-y-1 transition-all duration-300" onclick="window.location.href='/'">
                             Belanja Sekarang
                         </button>
 
