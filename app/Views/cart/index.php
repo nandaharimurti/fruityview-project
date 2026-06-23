@@ -1,3 +1,10 @@
+<?php
+session_start();
+if (!isset($_SESSION['user_id'])) {
+    header('Location: ../login/login.php');
+    exit;
+}
+?>
 <!DOCTYPE html><html class="light" lang="id" style=""><head>
 <meta charset="utf-8">
 <meta content="width=device-width, initial-scale=1.0" name="viewport">
@@ -104,7 +111,7 @@
 <!-- Brand Logo -->
 <div class="flex items-center gap-2">
 <span class="material-symbols-outlined text-primary text-3xl" style="font-variation-settings: 'FILL' 1;">eco</span>
-<h1 class="font-display-lg text-headline-sm text-primary dark:text-primary-fixed-dim tracking-tight">FruityView</h1>
+<a class="font-display-lg text-headline-sm text-primary dark:text-primary-fixed-dim tracking-tight" href="../home/index.php">FruityView</a>
 </div>
 <!-- Search Bar (on_left context) -->
 <div class="hidden md:flex flex-1 max-w-md mx-12">
@@ -117,11 +124,11 @@
 <div class="flex items-center gap-6">
 
 <div class="flex items-center gap-4">
-<button class="p-2 rounded-full hover:bg-primary-container/10 text-primary transition-all relative">
+<button id="cart-button" type="button" class="p-2 rounded-full hover:bg-primary-container/10 text-primary transition-all relative">
 <span class="material-symbols-outlined text-2xl">shopping_cart</span>
-<span class="absolute top-1 right-1 bg-primary text-white text-[10px] w-4 h-4 flex items-center justify-center rounded-full font-bold">2</span>
+<span id="cart-count" class="absolute top-1 right-1 bg-primary text-white text-[10px] w-4 h-4 flex items-center justify-center rounded-full font-bold">0</span>
 </button>
-<button class="p-2 rounded-full hover:bg-primary-container/10 text-on-surface-variant transition-all">
+<button id="profile-button" type="button" class="p-2 rounded-full hover:bg-primary-container/10 text-on-surface-variant transition-all">
 <span class="material-symbols-outlined text-2xl">account_circle</span>
 </button>
 </div>
@@ -132,79 +139,19 @@
 <main class="flex-grow max-w-container-max mx-auto px-margin-desktop py-12 w-full">
 <!-- Breadcrumbs -->
 <nav class="flex items-center gap-2 mb-8 text-on-surface-variant font-body-md">
-<a class="hover:text-primary transition-colors" href="#">Beranda</a>
+<a class="hover:text-primary transition-colors" href="../catalog/index.php">Beranda</a>
 <span class="material-symbols-outlined text-sm">chevron_right</span>
 <span class="text-primary font-bold">Keranjang</span>
 </nav>
 <!-- Title -->
 <div class="mb-12">
 <h2 class="font-headline-md text-headline-md text-on-surface">Keranjang Belanja</h2>
-<p class="text-on-surface-variant font-body-md">Anda memiliki 2 item di keranjang Anda</p>
+<p class="text-on-surface-variant font-body-md" id="cart-summary-text">Memuat keranjang...</p>
 </div>
 <div class="grid grid-cols-1 lg:grid-cols-12 gap-gutter items-start">
-<!-- Cart Items List -->
-<section class="lg:col-span-8 flex flex-col gap-6">
-<!-- Product Card 1 -->
-<div class="bg-surface-container-lowest p-6 rounded-xl flex items-center gap-6 custom-shadow transition-transform hover:scale-[1.01] duration-300">
-<div class="w-32 h-32 rounded-lg overflow-hidden bg-surface-container flex-shrink-0">
-<img class="w-full h-full object-cover" data-alt="A high-resolution, vibrant close-up of a cluster of organic Red Gala Apples with droplets of fresh dew on their skin. The lighting is bright and warm, mimicking a morning market stall, set against a soft, cream-colored minimalist background. The style is professional commercial photography with a shallow depth of field." src="https://lh3.googleusercontent.com/aida-public/AB6AXuA1HFZhnNRmp_XZwjGuoWYQm0Ab91ECWraqvNwrgMeoZJlT_UC3GGlEamQ0_S-GKReqTW_FP-IH0LKgC925zHAxMJLWAwyIa57izs17cnFeuIxo2c095GYQISi3qhhNjFZ2bkoVak3TuKgh1A_JYx46yr-p0SFaONCs21zk6zSXIy23KHXQ6NvOZ0gxNTu7OkNDUn7oakSjmN7djFjZB5cu5c6T3mVVC8xp7Q6twea6cdNHrKyyrDpfmWKJ57Ag4HybPieocVgrpA">
-</div>
-<div class="flex-grow">
-<div class="flex justify-between items-start">
-<div>
-<h3 class="font-headline-sm text-lg text-on-surface">Apel Merah Gala</h3>
-<p class="text-on-surface-variant font-body-md">Organik • 1kg</p>
-</div>
-<button class="text-on-surface-variant hover:text-error transition-colors p-1">
-<span class="material-symbols-outlined">delete</span>
-</button>
-</div>
-<div class="flex justify-between items-end mt-6">
-<div class="flex items-center bg-surface-container rounded-full p-1 border border-outline-variant">
-<button class="w-8 h-8 flex items-center justify-center hover:bg-surface-container-highest rounded-full transition-colors">
-<span class="material-symbols-outlined text-sm">remove</span>
-</button>
-<span class="px-4 font-label-bold text-on-surface">1</span>
-<button class="w-8 h-8 flex items-center justify-center hover:bg-surface-container-highest rounded-full transition-colors">
-<span class="material-symbols-outlined text-sm">add</span>
-</button>
-</div>
-<span class="font-headline-sm text-primary">Rp 45.000</span>
-</div>
-</div>
-</div>
-<!-- Product Card 2 -->
-<div class="bg-surface-container-lowest p-6 rounded-xl flex items-center gap-6 custom-shadow transition-transform hover:scale-[1.01] duration-300">
-<div class="w-32 h-32 rounded-lg overflow-hidden bg-secondary-container/20 flex-shrink-0">
-<img class="w-full h-full object-cover" data-alt="Vivid, bright orange Sunkist oranges arranged artistically on a clean surface. One orange is sliced in half to show the juicy, vibrant interior texture. The lighting is crisp and natural, highlighting the citrus's pore-heavy rind. The overall aesthetic is wholesome and energetic, fitting a modern organic marketplace brand." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCKrGvKqYagWoYAlsI5952OrGUlPGr1FxUxwXDgiNhZxcckswY-K6qOdt_EkEUUH2vjNQbaidiXyzWeZNjIdEt6iAY2-o1r0nIwT_bvYb2T6HA1vpKlBc3NYwBcKCmhaiUlvMel5osQWyjI1safZ-nrd-od5Mw8DAq6ALM_U9oa_HMsCi6DUGYu0Uy0LbJ_1S4eJyL5x-qnC6Fdl-XkGY_U0y79Db8-vk8crjEisyiVHb1NbyBWmmkeN7brnKoLlyJSXhdfYXxrQQ">
-</div>
-<div class="flex-grow">
-<div class="flex justify-between items-start">
-<div>
-<h3 class="font-headline-sm text-lg text-on-surface">Jeruk Sunkist</h3>
-<p class="text-on-surface-variant font-body-md">Import • 500g</p>
-</div>
-<button class="text-on-surface-variant hover:text-error transition-colors p-1">
-<span class="material-symbols-outlined">delete</span>
-</button>
-</div>
-<div class="flex justify-between items-end mt-6">
-<div class="flex items-center bg-surface-container rounded-full p-1 border border-outline-variant">
-<button class="w-8 h-8 flex items-center justify-center hover:bg-surface-container-highest rounded-full transition-colors">
-<span class="material-symbols-outlined text-sm">remove</span>
-</button>
-<span class="px-4 font-label-bold text-on-surface">2</span>
-<button class="w-8 h-8 flex items-center justify-center hover:bg-surface-container-highest rounded-full transition-colors">
-<span class="material-symbols-outlined text-sm">add</span>
-</button>
-</div>
-<span class="font-headline-sm text-primary">Rp 56.000</span>
-</div>
-</div>
-</div>
-<!-- Empty Cart Incentive / Suggestions -->
+<!-- Cart Items List (diisi otomatis oleh cart.js dari localStorage) -->
+<section class="lg:col-span-8 flex flex-col gap-6" id="cart-items"></section>
 
-</section>
 <!-- Order Summary Sidebar -->
 <aside class="lg:col-span-4 flex flex-col gap-6 sticky top-24">
 <div class="bg-surface-container-low p-8 rounded-2xl border border-outline-variant">
@@ -212,19 +159,15 @@
 <div class="space-y-4 mb-8">
 <div class="flex justify-between font-body-md text-on-surface-variant">
 <span class="">Subtotal</span>
-<span class="">Rp 101.000</span>
+<span id="cart-subtotal">Rp 0</span>
 </div>
 <div class="flex justify-between font-body-md text-on-surface-variant">
 <span class="">Pengiriman (Estimasi)</span>
-<span class="">Rp 15.000</span>
-</div>
-<div class="flex justify-between font-body-md text-on-surface-variant">
-<span class="">Diskon</span>
-<span class="text-secondary">- Rp 5.000</span>
+<span id="cart-shipping">Rp 0</span>
 </div>
 <div class="pt-4 border-t border-outline-variant flex justify-between">
 <span class="font-headline-sm text-lg text-on-surface">Total Harga</span>
-<span class="font-headline-sm text-lg text-primary">Rp 111.000</span>
+<span class="font-headline-sm text-lg text-primary" id="cart-total">Rp 0</span>
 </div>
 </div>
 <!-- Promo Code Input -->
@@ -232,11 +175,11 @@
 <label class="block text-sm font-label-bold mb-2 text-on-surface-variant">Kode Promo</label>
 <div class="flex gap-2">
 <input class="flex-grow bg-surface-container-lowest border-outline-variant rounded-lg px-4 py-2 text-sm focus:ring-primary focus:border-primary" placeholder="Masukkan kode" type="text">
-<button class="bg-secondary text-white px-4 py-2 rounded-lg font-label-bold hover:bg-secondary-fixed-dim hover:text-on-secondary transition-all">Pakai</button>
+<button id="promo-button" type="button" class="bg-secondary text-white px-4 py-2 rounded-lg font-label-bold hover:bg-secondary-fixed-dim hover:text-on-secondary transition-all">Pakai</button>
 </div>
 </div>
 <!-- CTA Button -->
-<button class="w-full bg-primary-container text-white font-headline-sm text-lg py-4 rounded-full flex items-center justify-center gap-2 hover:brightness-105 active:scale-95 transition-all shadow-lg shadow-primary/20">
+<button id="checkout-button" type="button" class="w-full bg-primary-container text-white font-headline-sm text-lg py-4 rounded-full flex items-center justify-center gap-2 hover:brightness-105 active:scale-95 transition-all shadow-lg shadow-primary/20 disabled:opacity-50 disabled:cursor-not-allowed">
                         Lanjut ke Pembayaran
                         <span class="material-symbols-outlined">arrow_forward</span>
 </button>
@@ -257,6 +200,12 @@
 </aside>
 </div>
 </main>
+<script>
+    window.fvApp = {
+        profilePage: '../profile/profile.php',
+        catalogPage: '../catalog/index.php'
+    };
+</script>
 <!-- Footer (Shared Component) -->
 <footer class="bg-surface-container-low">
 <div class="w-full py-16 px-margin-desktop grid grid-cols-1 md:grid-cols-2 justify-between items-center max-w-container-max mx-auto">
@@ -293,7 +242,7 @@
 </div>
 </div>
 </footer>
-<!-- Simple Interactivity for Quantity Selector -->
-<script src="/public/assets/js/cart.js"></script>
+<!-- Render keranjang dinamis dari localStorage (terhubung dengan katalog) -->
+<script src="../../../public/assets/js/cart.js"></script>
 
 </body></html>
