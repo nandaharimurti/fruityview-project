@@ -294,6 +294,6 @@
 </div>
 </footer>
 <!-- Simple Interactivity for Quantity Selector -->
-<script src="../../../public/assets/js/cart.js"></script>
+<script src="/public/assets/js/cart.js"></script>
 
 </body></html>
