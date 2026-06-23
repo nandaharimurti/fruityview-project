@@ -4,10 +4,7 @@
 <title>Join Orchard Fresh - Create Your Account</title>
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;700;800&amp;family=Work+Sans:wght@400;500&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@100..900&amp;family=Work+Sans:wght@100..900&amp;display=swap" rel="stylesheet">
-<script src="/app/Views/assets/js/tailwind-config.js"></script>
-<link rel="stylesheet" href="/app/Views/assets/css/register.css">
+<link rel="stylesheet" href="/public/assets/css/register.css">
 </head>
 <body class="bg-background text-on-background font-body-md min-h-screen flex flex-col">
 <!-- TopNavBar (Suppressed for focused Transactional Page per UX mandate, but user asked for it specifically) -->
@@ -140,7 +137,6 @@
 </main>
 <!-- Footer -->
 
-<script src="/app/Views/assets/js/register.js"></script>
+<script src="/public/assets/js/register.js"></script>
 
 </body></html>
-
