@@ -11,3 +11,63 @@
 .organic-shape {
     border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
 }
+
+/* ==========================================
+   NOTIFICATION STYLES
+   ========================================== */
+.notification-toast {
+    animation: slideInRight 0.3s ease-out, slideOutRight 0.3s ease-out 3.7s forwards;
+}
+
+@keyframes slideInRight {
+    from {
+        opacity: 0;
+        transform: translateX(400px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes slideOutRight {
+    from {
+        opacity: 1;
+        transform: translateX(0);
+    }
+    to {
+        opacity: 0;
+        transform: translateX(400px);
+    }
+}
+
+/* ==========================================
+   LOADING STATE
+   ========================================== */
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.animate-spin {
+    animation: spin 1s linear infinite;
+}
+
+/* ==========================================
+   INPUT FOCUS EFFECTS
+   ========================================== */
+input:focus {
+    box-shadow: 0 0 0 3px rgba(145, 76, 0, 0.1);
+}
+
+/* ==========================================
+   BUTTON HOVER EFFECTS
+   ========================================== */
+button:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+}

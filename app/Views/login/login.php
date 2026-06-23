@@ -137,7 +137,7 @@
 <div class="space-y-1.5">
 <div class="flex justify-between items-center px-1">
 <label class="font-label-bold text-label-bold text-on-surface-variant block" for="password">Kata Sandi</label>
-<a class="font-label-bold text-label-bold text-primary hover:underline transition-all" href="#">Lupa Kata Sandi?</a>
+<a class="font-label-bold text-label-bold text-primary hover:underline transition-all forgot-password" href="/app/Views/forgot-password/forgot-password.php">Lupa Kata Sandi?</a>
 </div>
 <div class="relative group">
 <span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-outline group-focus-within:text-primary transition-colors" data-icon="lock">lock</span>
@@ -167,7 +167,7 @@
 <!-- Footer Link -->
 <p class="mt-10 text-center font-body-md text-body-md text-on-surface-variant">
                         Belum punya akun? 
-                        <a class="font-label-bold text-primary hover:underline ml-1" href="#">Daftar sekarang</a>
+                        <a class="font-label-bold text-primary hover:underline ml-1 register-link" href="/app/Views/register/register.php">Daftar sekarang</a>
 </p>
 </div>
 </section>
