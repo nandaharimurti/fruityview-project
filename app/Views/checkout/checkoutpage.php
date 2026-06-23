@@ -325,5 +325,5 @@
             © 2024 FruityView. Orchard Fresh Quality.
         </div>
 </footer>
-<script src="../../public/assets/js/checkout.js"></script>
+<script src="/public/assets/js/checkout.js"></script>
 </body></html>
