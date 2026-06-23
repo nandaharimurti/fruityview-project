@@ -95,7 +95,7 @@
         },
       }
     </script>
-<link rel="stylesheet" href="../../public/assets/css/profile.css">
+<link rel="stylesheet" href="/public/assets/css/profile.css">
 </head>
 <body class="bg-background text-on-background font-body-md min-h-screen">
 <header class="sticky top-0 w-full z-50 bg-surface/80 backdrop-blur-md shadow-[0_4px_20px_rgba(145,76,0,0.1)]">
@@ -208,7 +208,7 @@ Logout
 <span class="text-[10px] font-label-bold">Profile</span>
 </a>
 </nav>
-<script src="../../public/assets/js/profile.js"></script>
+<script src="/public/assets/js/profile.js"></script>
 
 
 </body></html>
