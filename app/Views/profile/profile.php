@@ -1,12 +1,43 @@
-<!DOCTYPE html><html class="light" lang="en" style="width: 1280px; height: 1295px; overflow: hidden; position: relative;"><head>
+<?php
+if (session_status() === PHP_SESSION_NONE) {
+        session_start();
+}
+
+require_once __DIR__ . '/../../../firebase/firebase.php';
+
+// Redirect to login if not authenticated
+if (empty($_SESSION['user_id'])) {
+        header('Location: ../login/login.php');
+        exit;
+}
+
+$name = 'Pengguna';
+$email = '';
+$phone = '';
+$created_at = '';
+
+$userId = $_SESSION['user_id'];
+try {
+        $userData = $database->getReference('users/' . $userId)->getValue();
+        if ($userData) {
+                $name = $userData['name'] ?? $name;
+                $email = $userData['email'] ?? $email;
+                $phone = $userData['phone'] ?? $phone;
+                $created_at = isset($userData['created_at']) ? date('j F Y', strtotime($userData['created_at'])) : '';
+        }
+} catch (Exception $e) {
+        error_log('Profile load error: ' . $e->getMessage());
+}
+?>
+<!DOCTYPE html>
+<html class="light" lang="en">
+<head>
 <meta charset="utf-8">
 <meta content="width=device-width, initial-scale=1.0" name="viewport">
 <title>User Profile | FruityView</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;700;800&amp;family=Work+Sans:wght@400;500&amp;display=swap" rel="stylesheet">
-
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;700;800&family=Work+Sans:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
 <script id="tailwind-config">
       tailwind.config = {
@@ -97,118 +128,138 @@
     </script>
 <link rel="stylesheet" href="/public/assets/css/profile.css">
 </head>
-<body class="bg-background text-on-background font-body-md min-h-screen">
-<header class="sticky top-0 w-full z-50 bg-surface/80 backdrop-blur-md shadow-[0_4px_20px_rgba(145,76,0,0.1)]">
-<div class="flex justify-between items-center h-16 px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto">
-<div class="flex items-center gap-8">
-<span class="font-headline-sm text-headline-sm font-extrabold text-primary">FruityView</span>
-</div>
-<div class="flex items-center gap-4">
-<div class="w-8 h-8 rounded-full overflow-hidden border border-outline-variant">
 
-</div>
-</div>
-</div>
+<body class="bg-background text-on-background font-body-md min-h-screen">
+
+<!-- ===== HEADER ===== -->
+<header class="sticky top-0 w-full z-50 bg-surface/80 backdrop-blur-md shadow-[0_4px_20px_rgba(145,76,0,0.1)]">
+  <div class="flex justify-between items-center h-16 px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto">
+    <div class="flex items-center gap-8">
+      <a href="../home/index.php" class="font-headline-sm text-headline-sm font-extrabold text-primary">FruityView</a>
+    </div>
+    <div class="flex items-center gap-4">
+      <div class="w-8 h-8 rounded-full overflow-hidden border border-outline-variant">
+      </div>
+    </div>
+  </div>
 </header>
+
+<!-- ===== MAIN LAYOUT ===== -->
 <div class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop py-12 flex flex-col lg:flex-row gap-12">
 
-<aside class="lg:w-64 flex-shrink-0">
-<div class="bg-surface border border-outline-variant rounded-2xl p-4 sticky top-28">
-<div class="flex items-center gap-3 mb-8 px-2">
-<div class="w-10 h-10 rounded-full bg-primary-container flex items-center justify-center text-on-primary-container">
-<span class="material-symbols-outlined" style="font-variation-settings: &quot;FILL&quot; 1;">person</span>
-</div>
-<div>
-<p class="font-label-bold text-label-bold text-on-surface">Siska Maharani</p>
-<p class="text-xs text-on-surface-variant">Fresh Member</p>
-</div>
-</div>
-<nav class="space-y-1"><a class="flex items-center gap-3 text-on-surface-variant hover:text-primary px-4 py-3 rounded-xl font-body-md transition-all active:scale-98" href="#">
-<span class="material-symbols-outlined">home</span>
-<span class="font-body-md text-body-md">Beranda</span>
-</a>
-<a class="flex items-center gap-3 bg-primary-container text-on-primary-container px-4 py-3 rounded-xl font-bold transition-all active:scale-98" href="#">
-<span class="material-symbols-outlined active-nav">person</span>
-<span class="font-body-md text-body-md">My Profile</span>
-</a>
+  <!-- ===== SIDEBAR ===== -->
+  <aside class="lg:w-64 flex-shrink-0">
+    <div class="bg-surface border border-outline-variant rounded-2xl p-4 sticky top-28">
 
-<div class="pt-8 px-4">
+      <!-- User Info -->
+      <div class="flex items-center gap-3 mb-6 px-2">
+        <div class="w-10 h-10 rounded-full bg-primary-container flex items-center justify-center text-on-primary-container flex-shrink-0">
+          <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">person</span>
+        </div>
+        <div class="min-w-0">
+          <p class="font-label-bold text-label-bold text-on-surface truncate"><?php echo htmlspecialchars($name); ?></p>
+          <p class="text-xs text-on-surface-variant truncate"><?php echo htmlspecialchars($email); ?></p>
+        </div>
+      </div>
 
-<button class="w-full mt-4 border border-outline text-on-surface-variant font-label-bold text-label-bold py-3 rounded-full shadow-sm hover:bg-surface-container-low active:scale-95 transition-all flex items-center justify-center gap-2">
-<span class="material-symbols-outlined text-sm">logout</span>
-Logout
-</button></div>
-</nav>
-</div>
-</aside>
+      <!-- Navigation -->
+      <nav class="space-y-1">
+        <a class="flex items-center gap-3 text-on-surface-variant hover:text-primary px-4 py-3 rounded-xl font-body-md transition-all active:scale-98" href="../home/index.php">
+          <span class="material-symbols-outlined">home</span>
+          <span class="font-body-md text-body-md">Beranda</span>
+        </a>
+        <a class="flex items-center gap-3 bg-primary-container text-on-primary-container px-4 py-3 rounded-xl font-bold transition-all active:scale-98" href="#">
+          <span class="material-symbols-outlined active-nav">person</span>
+          <span class="font-body-md text-body-md">My Profile</span>
+        </a>
 
-<main class="flex-grow">
-<header class="mb-8">
-<h1 class="font-headline-md text-headline-md text-primary mb-2">Informasi Akun Anda</h1>
-<p class="font-body-md text-body-md text-on-surface-variant max-w-2xl">Kelola detail profil, informasi kontak, dan lihat riwayat aktivitas belanja Anda di satu tempat yang aman.</p>
-</header>
+        <div class="pt-8 px-4">
+          <a href="../../Controllers/LogoutController.php" class="w-full inline-block mt-4 border border-outline text-on-surface-variant font-label-bold text-label-bold py-3 rounded-full shadow-sm hover:bg-surface-container-low active:scale-95 transition-all flex items-center justify-center gap-2 text-center">
+            <span class="material-symbols-outlined text-sm">logout</span>
+            Logout
+          </a>
+        </div>
+      </nav>
 
-<section class="bg-surface-container-lowest border border-outline-variant rounded-3xl p-6 md:p-8 mb-10 shadow-sm transition-all hover:shadow-md">
-<div class="flex flex-col md:flex-row gap-8 items-start">
+    </div>
+  </aside>
 
-<div class="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-6 flex-grow"><div>
-<p class="text-xs font-label-bold text-primary uppercase tracking-wider mb-1">Nama Lengkap</p>
-<p class="font-headline-sm text-headline-sm text-on-surface">Siska Maharani</p>
-</div>
-<div>
-<p class="text-xs font-label-bold text-primary uppercase tracking-wider mb-1">Alamat Email</p>
-<p class="font-body-lg text-body-lg text-on-surface">siska.maharani@fruityview.com</p>
-</div>
-<div>
-<p class="text-xs font-label-bold text-primary uppercase tracking-wider mb-1">Nomor Telepon</p>
-<p class="font-body-lg text-body-lg text-on-surface">+62 812 3456 7890</p>
-</div>
-<div>
-<p class="text-xs font-label-bold text-primary uppercase tracking-wider mb-1">Tanggal Bergabung</p>
-<p class="font-body-lg text-body-lg text-on-surface">12 Januari 2023</p>
-</div></div>
-</div>
-</section>
+  <!-- ===== MAIN CONTENT ===== -->
+  <main class="flex-grow min-w-0">
 
-<section class="grid grid-cols-1 md:grid-cols-3 gap-6">
-</section>
-</main>
+    <!-- Page Header -->
+    <header class="mb-8">
+      <h1 class="font-headline-md text-headline-md text-primary mb-2">Informasi Akun Anda</h1>
+      <p class="font-body-md text-body-md text-on-surface-variant max-w-2xl">Kelola detail profil, informasi kontak, dan lihat riwayat aktivitas belanja Anda di satu tempat yang aman.</p>
+    </header>
+
+    <!-- Profile Info Card -->
+    <section class="bg-surface-container-lowest border border-outline-variant rounded-3xl p-6 md:p-8 mb-10 shadow-sm transition-all hover:shadow-md">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-6">
+
+        <div>
+          <p class="text-xs font-label-bold text-primary uppercase tracking-wider mb-1">Nama Lengkap</p>
+          <p class="font-headline-sm text-headline-sm text-on-surface"><?php echo htmlspecialchars($name); ?></p>
+        </div>
+
+        <div>
+          <p class="text-xs font-label-bold text-primary uppercase tracking-wider mb-1">Alamat Email</p>
+          <p class="font-body-lg text-body-lg text-on-surface break-all"><?php echo htmlspecialchars($email); ?></p>
+        </div>
+
+        <div>
+          <p class="text-xs font-label-bold text-primary uppercase tracking-wider mb-1">Nomor Telepon</p>
+          <p class="font-body-lg text-body-lg text-on-surface"><?php echo htmlspecialchars($phone); ?></p>
+        </div>
+
+        <div>
+          <p class="text-xs font-label-bold text-primary uppercase tracking-wider mb-1">Tanggal Bergabung</p>
+          <p class="font-body-lg text-body-lg text-on-surface"><?php echo htmlspecialchars($created_at); ?></p>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Extra Sections (empty, reserved) -->
+    <section class="grid grid-cols-1 md:grid-cols-3 gap-6">
+    </section>
+
+  </main>
 </div>
 
+<!-- ===== FOOTER ===== -->
 <footer class="w-full py-12 bg-surface-container-lowest border-t border-outline-variant mt-24">
-<div class="w-full px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto flex flex-col md:flex-row justify-between items-center gap-8">
-<div class="text-center md:text-left">
-<span class="font-headline-sm text-headline-sm text-primary block mb-2">FruityView</span>
-<p class="text-on-surface-variant font-body-md text-body-md">© 2024 FruityView Marketplace. Stay Fresh.</p>
-</div>
-<div class="flex gap-8">
-
-
-
-
-</div>
-</div>
+  <div class="w-full px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto flex flex-col md:flex-row justify-between items-center gap-8">
+    <div class="text-center md:text-left">
+      <span class="font-headline-sm text-headline-sm text-primary block mb-2">FruityView</span>
+      <p class="text-on-surface-variant font-body-md text-body-md">© 2024 FruityView Marketplace. Stay Fresh.</p>
+    </div>
+    <div class="flex gap-8">
+    </div>
+  </div>
 </footer>
 
+<!-- ===== BOTTOM NAV (mobile) ===== -->
 <nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 py-2 pb-safe lg:hidden bg-surface/90 backdrop-blur-lg shadow-lg rounded-t-xl">
-<a class="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary transition-colors" href="#">
-<span class="material-symbols-outlined">home</span>
-<span class="text-[10px] font-label-bold">Home</span>
-</a>
-<a class="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary transition-colors" href="#">
-<span class="material-symbols-outlined">history</span>
-<span class="text-[10px] font-label-bold">Orders</span>
-</a>
-<a class="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary transition-colors" href="#">
-<span class="material-symbols-outlined">shopping_cart</span>
-<span class="text-[10px] font-label-bold">Cart</span>
-</a>
-<a class="flex flex-col items-center justify-center bg-primary-container text-on-primary-container rounded-full px-4 py-1" href="#">
-<span class="material-symbols-outlined active-nav">person</span>
-<span class="text-[10px] font-label-bold">Profile</span>
-</a>
+  <a class="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary transition-colors" href="#">
+    <span class="material-symbols-outlined">home</span>
+    <span class="text-[10px] font-label-bold">Home</span>
+  </a>
+  <a class="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary transition-colors" href="#">
+    <span class="material-symbols-outlined">history</span>
+    <span class="text-[10px] font-label-bold">Orders</span>
+  </a>
+  <a class="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary transition-colors" href="#">
+    <span class="material-symbols-outlined">shopping_cart</span>
+    <span class="text-[10px] font-label-bold">Cart</span>
+  </a>
+  <a class="flex flex-col items-center justify-center bg-primary-container text-on-primary-container rounded-full px-4 py-1" href="#">
+    <span class="material-symbols-outlined active-nav">person</span>
+    <span class="text-[10px] font-label-bold">Profile</span>
+  </a>
 </nav>
+
 <script src="/public/assets/js/profile.js"></script>
 
-
-</body></html>
+</body>
+</html>
