@@ -229,49 +229,95 @@
 <div class="bg-surface-container-lowest p-8 rounded-2xl organic-shadow border border-surface-variant/50">
 <h2 class="font-headline-sm text-headline-sm mb-6 text-on-surface">Ringkasan Pesanan</h2>
 <!-- Item List -->
-<div class="space-y-4 mb-8">
-<div class="flex items-center gap-4">
-<div class="w-16 h-16 rounded-xl bg-surface-container overflow-hidden flex-shrink-0">
-<img class="w-full h-full object-cover" data-alt="A macro studio photograph of a vibrant, glossy Red Gala apple with water droplets, sitting on a pale cream surface under warm, bright lighting. The style is clean, modern, and highly appetizing with soft natural shadows." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBF_X8caIeglssDVW9rBgOavwsE-ZUBSip6xuW3sDll8FHPOb88ZJcqk90AmZkxYRGk_UMYuFV6HTTizcWULul0FY3xMpRJPb5UVXTrs0ZpsAmPBlrgaA6VUld9XFUe_jhV0qzc5Hd9kAfgB9NbAWaa5BGKRF2DZcFGKhTdSvBtFHGgSosNBfhfCIAkTaoxutRZrrzgrkWLLl0f99PcQDu7g1JhqMPrCs1KjMX8MsOpct97EIcC4LtR_pFUDu2lfuYvmMB-pE7ONw"/>
-</div>
-<div class="flex-1">
-<p class="font-label-bold text-label-bold">Red Gala Apples</p>
-<p class="text-body-md text-on-surface-variant">1kg × 2</p>
-</div>
-<p class="font-label-bold text-primary">Rp 64.000</p>
-</div>
-<div class="flex items-center gap-4">
-<div class="w-16 h-16 rounded-xl bg-surface-container overflow-hidden flex-shrink-0">
-<img class="w-full h-full object-cover" data-alt="Close-up of fresh Sunkist oranges with a textured citrus peel, showcasing their bright orange color and wholesome quality. The lighting is sunny and optimistic, reflecting a farmers market aesthetic with a minimalist light-mode background." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDk0irerufedtx8nWAWoPO5r8LkhCU69KG3ngumBnOC0LdozAvIkuMZX3-gJ2Pd7XNn4bM3tEmbBls6EakEX9peOdHotl_GauHOKROJv_GH83U9Ys1yZdexPjSwP0defa-uaDwir1tfybRnEIFB-sCaSoiUwHFmD5wrTXBpRAF3MY-RdMFtcqj-sPfZYEI2KuAK1gtXSEfbN8vfQZDdioNgK2L0SdsGq8ZFbKRYqicyf0sxsjBol_NQIEGRSzFVGohuIbR6QppsiA"/>
-</div>
-<div class="flex-1">
-<p class="font-label-bold text-label-bold">Sunkist Oranges</p>
-<p class="text-body-md text-on-surface-variant">1kg × 1</p>
-</div>
-<p class="font-label-bold text-primary">Rp 45.000</p>
-</div>
+<div class="space-y-4 mb-8" id="order-items">
+<?php
+    require_once __DIR__ . '/../../Models/CartModel.php';
+    $cartModel = new CartModel();
+    // Sumber cart checkout: utamakan session cart dari add-to-cart API.
+    // Fallback ke sessionStorage/route data yang disiapkan saat klik checkout dari halaman cart.
+    $cart = $cartModel->getCart();
+
+    // cart.js menyimpan ke sessionStorage, jadi kita baca dari sessionStorage via script (di bawah)
+    // atau alternatif: kalau server--side sudah dipush ke session.
+    if (empty($cart) && isset($_SESSION['fv_checkout_cart'])) {
+        $cart = $_SESSION['fv_checkout_cart'];
+    }
+
+
+
+
+    // Cart format: array of items, try to support a few common structures.
+    $subtotal = 0;
+    if (!empty($cart) && is_array($cart)) {
+        foreach ($cart as $key => $item) {
+            // Samakan field dengan api/add-to-cart.php: product_id, name, price, quantity
+            $name = $item['name'] ?? ($item['product_name'] ?? ('Item ' . $key));
+            $qty = (int)($item['quantity'] ?? $item['qty'] ?? 1);
+            $price = (int)($item['price'] ?? $item['unit_price'] ?? 0);
+
+
+
+            $lineTotal = $price * $qty;
+            $subtotal += $lineTotal;
+
+            $img = $item['image'] ?? ($item['img'] ?? '');
+            if (!$img) {
+                // optional: keep UI stable without breaking layout
+                $img = 'data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=';
+            }
+
+            // Tambahkan item yang dipilih dari cart ke checkout (render sesuai isi session cart)
+            echo '<div class="flex items-center gap-4">';
+
+            echo '  <div class="w-16 h-16 rounded-xl bg-surface-container overflow-hidden flex-shrink-0">';
+            echo '    <img class="w-full h-full object-cover" src="' . htmlspecialchars($img, ENT_QUOTES, 'UTF-8') . '" alt=""/>';
+            echo '  </div>';
+            echo '  <div class="flex-1">';
+            echo '    <p class="font-label-bold text-label-bold">' . htmlspecialchars($name, ENT_QUOTES, 'UTF-8') . '</p>';
+            echo '  <p class="text-body-md text-on-surface-variant">1kg × ' . (int)$qty . '</p>';
+            echo '  </div>';
+            echo '  <p class="font-label-bold text-primary">Rp ' . number_format($lineTotal, 0, ',', '.') . '</p>';
+            echo '</div>';
+        }
+    }
+
+    ?>
 </div>
 <hr class="border-surface-variant mb-6"/>
 <!-- Price Breakdown -->
 <div class="space-y-3 mb-8">
 <div class="flex justify-between text-on-surface-variant">
 <span>Subtotal</span>
-<span>Rp 109.000</span>
+<span id="subtotal-amount">Rp <?php echo number_format($subtotal ?? 0, 0, ',', '.'); ?></span>
 </div>
 <div class="flex justify-between text-on-surface-variant">
-<span>Biaya Pengiriman (Reguler)</span>
-<span>Rp 15.000</span>
+<span id="shipping-label">Biaya Pengiriman (Reguler)</span>
+<span id="shipping-amount">Rp 15.000</span>
+
 </div>
 <div class="flex justify-between font-headline-sm text-headline-sm text-on-surface mt-2 pt-2 border-t border-dashed border-surface-variant">
 <span>Total Tagihan</span>
-<span class="text-primary-container">Rp 124.000</span>
+<span class="text-primary-container" id="total-amount">Rp <?php echo number_format(($subtotal ?? 0) + 15000, 0, ',', '.'); ?></span>
 </div>
 </div>
+
 <!-- CTA Button -->
-<button class="w-full py-4 bg-primary-container text-on-primary font-label-bold text-lg rounded-full organic-shadow hover:bg-primary transition-all active:scale-[0.98] flex items-center justify-center gap-3">
+<div id="payment-popup" class="fixed inset-0 z-[100] hidden items-center justify-center bg-black/40">
+    <div class="bg-surface-container-lowest border border-outline-variant rounded-2xl p-6 w-[90%] max-w-sm text-center">
+        <div class="flex items-center justify-center">
+            <span class="material-symbols-outlined text-primary text-4xl" style="font-variation-settings:'FILL' 1;">verified</span>
+        </div>
+        <h3 class="mt-3 font-headline-sm text-headline-sm text-on-surface">Pembayaran berhasil</h3>
+        <p class="mt-2 text-on-surface-variant text-body-md">Terima kasih telah berbelanja di FruityView.</p>
+    </div>
+</div>
+
+<button id="pay-now" class="w-full py-4 bg-primary-container text-on-primary font-label-bold text-lg rounded-full organic-shadow hover:bg-primary transition-all active:scale-[0.98] flex items-center justify-center gap-3" type="button">
+
 <span class="material-symbols-outlined">lock</span>
                         Bayar Sekarang
                     </button>
+
 <p class="mt-4 text-center text-xs text-on-surface-variant flex items-center justify-center gap-1">
 <span class="material-symbols-outlined text-sm">verified_user</span>
                         Pembayaran aman & terenkripsi oleh FruityView
@@ -326,4 +372,59 @@
         </div>
 </footer>
 <script src="/public/assets/js/checkout.js"></script>
+<script>
+    // Ambil cart untuk checkout dari sessionStorage (yang diisi oleh public/assets/js/cart.js)
+    // lalu render ke HTML agar ringkasan checkout tampil.
+    (function () {
+        try {
+            const raw = sessionStorage.getItem('fv_checkout_cart');
+            if (!raw) return;
+            const cart = JSON.parse(raw);
+            if (!Array.isArray(cart) || cart.length === 0) return;
+
+            const itemsEl = document.getElementById('order-items');
+            const subtotalEl = document.getElementById('subtotal-amount');
+            const shippingAmountEl = document.getElementById('shipping-amount');
+            const totalEl = document.getElementById('total-amount');
+            if (!itemsEl) return;
+
+            let subtotal = 0;
+            itemsEl.innerHTML = '';
+
+            cart.forEach((item, idx) => {
+                const name = item.name || item.product_name || item.title || ('Item ' + (idx + 1));
+                const qty = Number(item.quantity ?? item.qty ?? 1) || 1;
+                const price = Number(item.price ?? item.unit_price ?? 0) || 0;
+                const lineTotal = price * qty;
+                subtotal += lineTotal;
+                const img = item.image || item.img || '';
+
+                const wrapper = document.createElement('div');
+                wrapper.className = 'flex items-center gap-4';
+
+                wrapper.innerHTML = `
+                    <div class="w-16 h-16 rounded-xl bg-surface-container overflow-hidden flex-shrink-0">
+                        <img class="w-full h-full object-cover" src="${img || ''}" alt=""/>
+                    </div>
+                    <div class="flex-1">
+                        <p class="font-label-bold text-label-bold">${String(name).replaceAll('<','<').replaceAll('>','>')}</p>
+                        <p class="text-body-md text-on-surface-variant">1kg × ${qty}</p>
+                    </div>
+                    <p class="font-label-bold text-primary">Rp ${Math.round(lineTotal).toLocaleString('id-ID')}</p>
+                `;
+
+                itemsEl.appendChild(wrapper);
+            });
+
+            // update subtotal & total awal (shipping default Reguler = 15000)
+            const shippingFee = 15000;
+            if (subtotalEl) subtotalEl.textContent = 'Rp ' + Math.round(subtotal).toLocaleString('id-ID');
+            if (shippingAmountEl) shippingAmountEl.textContent = 'Rp ' + shippingFee.toLocaleString('id-ID');
+            if (totalEl) totalEl.textContent = 'Rp ' + Math.round(subtotal + shippingFee).toLocaleString('id-ID');
+
+        } catch (e) {
+            // silent
+        }
+    })();
+</script>
 </body></html>
