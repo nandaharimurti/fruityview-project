@@ -6,7 +6,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;700;800&amp;family=Work+Sans:wght@400;500;600&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@100..900&amp;family=Work+Sans:wght@100..900&amp;display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/assets/css/login.css">
+<link rel="stylesheet" href="/public/assets/css/login.css">
 <script id="tailwind-config">
         tailwind.config = {
             darkMode: "class",
@@ -195,6 +195,6 @@
 </div>
 </div>
 </footer>
-<script src="/assets/js/login.js"></script>
+<script src="/public/assets/js/login.js"></script>
 
 </body></html>
