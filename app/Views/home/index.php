@@ -1,3 +1,6 @@
+<?php
+session_start();
+?>
 <!DOCTYPE html><html class="light" lang="id" style=""><head>
 <meta charset="utf-8">
 <meta content="width=device-width, initial-scale=1.0" name="viewport">
@@ -98,7 +101,7 @@
         },
       }
     </script>
-    <link rel="stylesheet" href="/assets/css/home-index.css">
+    <link rel="stylesheet" href="/public/assets/css/home-index.css">
 </head>
 <body class="bg-background text-on-background font-body-md selection:bg-primary-fixed selection:text-on-primary-fixed">
 <!-- TopAppBar -->
@@ -305,7 +308,7 @@
 </div>
 </div>
 </footer>
-<script src="/assets/js/home-index.js"></script>
+<script src="/public/assets/js/home-index.js"></script>
 
 
 </body></html>
